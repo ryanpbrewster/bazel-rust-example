@@ -1,0 +1,17 @@
+load("@rules_rust//proto/prost:defs.bzl", "rust_prost_library")
+
+
+proto_library(
+    name = "echo_proto",
+    srcs = ["echo.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_protobuf//:duration_proto",
+    ],
+)
+
+rust_prost_library(
+    name = "echo_proto_rs",
+    proto = ":echo_proto",
+    visibility = ["//visibility:public"],
+)

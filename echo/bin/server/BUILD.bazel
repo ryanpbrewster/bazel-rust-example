@@ -1,0 +1,14 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+
+rust_binary(
+    name = "server",
+    srcs = ["main.rs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//echo/proto:echo_proto_rs",
+        "@crate_index//:anyhow",
+        "@crate_index//:clap",
+        "@crate_index//:tokio",
+        "@crate_index//:tonic",
+    ],
+)
