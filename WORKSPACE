@@ -74,6 +74,12 @@ crates_repository(
         "tonic": crate.spec(
             version = "0.9.2",
         ),
+        "tonic-health": crate.spec(
+            version = "0.9.2",
+        ),
+        "tonic-reflection": crate.spec(
+            version = "0.9.2",
+        ),
     },
 )
 

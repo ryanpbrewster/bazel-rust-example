@@ -1,8 +1,5 @@
 use clap::Parser;
-use echo_proto::echo::proto::{
-    EchoRequest,
-    echo_client::EchoClient,
-};
+use echo_proto::echo::proto::{echo_client::EchoClient, EchoRequest};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {

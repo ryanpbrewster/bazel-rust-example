@@ -1,5 +1,5 @@
 {
-  "checksum": "e5b7e8cf56d36c990b4f0a1fc68164d5a0277c6d1ecfdedabb635246aeb67d35",
+  "checksum": "0ead4d35d58a371a2be00e6b14f30a5e431c9020e8500ea34abdcef97822b64a",
   "crates": {
     "addr2line 0.20.0": {
       "name": "addr2line",
@@ -412,6 +412,105 @@
         ]
       },
       "license": "MIT OR Apache-2.0"
+    },
+    "async-stream 0.3.5": {
+      "name": "async-stream",
+      "version": "0.3.5",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/async-stream/0.3.5/download",
+          "sha256": "cd56dd203fef61ac097dd65721a419ddccb106b2d2b70ba60a6b529f03961a51"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "async_stream",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "async_stream",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "futures-core 0.3.28",
+              "target": "futures_core"
+            },
+            {
+              "id": "pin-project-lite 0.2.10",
+              "target": "pin_project_lite"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "proc_macro_deps": {
+          "common": [
+            {
+              "id": "async-stream-impl 0.3.5",
+              "target": "async_stream_impl"
+            }
+          ],
+          "selects": {}
+        },
+        "version": "0.3.5"
+      },
+      "license": "MIT"
+    },
+    "async-stream-impl 0.3.5": {
+      "name": "async-stream-impl",
+      "version": "0.3.5",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/async-stream-impl/0.3.5/download",
+          "sha256": "16e62a023e7c117e27523144c5d2459f4397fcc3cab0085af8e2224f643a0193"
+        }
+      },
+      "targets": [
+        {
+          "ProcMacro": {
+            "crate_name": "async_stream_impl",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "async_stream_impl",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "proc-macro2 1.0.66",
+              "target": "proc_macro2"
+            },
+            {
+              "id": "quote 1.0.32",
+              "target": "quote"
+            },
+            {
+              "id": "syn 2.0.28",
+              "target": "syn"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "version": "0.3.5"
+      },
+      "license": "MIT"
     },
     "async-trait 0.1.72": {
       "name": "async-trait",
@@ -1350,6 +1449,14 @@
             {
               "id": "tonic 0.9.2",
               "target": "tonic"
+            },
+            {
+              "id": "tonic-health 0.9.2",
+              "target": "tonic_health"
+            },
+            {
+              "id": "tonic-reflection 0.9.2",
+              "target": "tonic_reflection"
             }
           ],
           "selects": {}
@@ -5725,6 +5832,7 @@
         "crate_features": {
           "common": [
             "default",
+            "net",
             "time"
           ],
           "selects": {}
@@ -6003,6 +6111,123 @@
             {
               "id": "syn 1.0.109",
               "target": "syn"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.9.2"
+      },
+      "license": "MIT"
+    },
+    "tonic-health 0.9.2": {
+      "name": "tonic-health",
+      "version": "0.9.2",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/tonic-health/0.9.2/download",
+          "sha256": "080964d45894b90273d2b1dd755fdd114560db8636bb41cea615213c45043c4d"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "tonic_health",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "tonic_health",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "default",
+            "transport"
+          ],
+          "selects": {}
+        },
+        "deps": {
+          "common": [
+            {
+              "id": "async-stream 0.3.5",
+              "target": "async_stream"
+            },
+            {
+              "id": "prost 0.11.9",
+              "target": "prost"
+            },
+            {
+              "id": "tokio 1.29.1",
+              "target": "tokio"
+            },
+            {
+              "id": "tokio-stream 0.1.14",
+              "target": "tokio_stream"
+            },
+            {
+              "id": "tonic 0.9.2",
+              "target": "tonic"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.9.2"
+      },
+      "license": "MIT"
+    },
+    "tonic-reflection 0.9.2": {
+      "name": "tonic-reflection",
+      "version": "0.9.2",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/tonic-reflection/0.9.2/download",
+          "sha256": "0543d7092032041fbeac1f2c84304537553421a11a623c2301b12ef0264862c7"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "tonic_reflection",
+            "crate_root": "src/lib.rs",
+            "srcs": [
+              "**/*.rs"
+            ]
+          }
+        }
+      ],
+      "library_target_name": "tonic_reflection",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "prost 0.11.9",
+              "target": "prost"
+            },
+            {
+              "id": "prost-types 0.11.9",
+              "target": "prost_types"
+            },
+            {
+              "id": "tokio 1.29.1",
+              "target": "tokio"
+            },
+            {
+              "id": "tokio-stream 0.1.14",
+              "target": "tokio_stream"
+            },
+            {
+              "id": "tonic 0.9.2",
+              "target": "tonic"
             }
           ],
           "selects": {}

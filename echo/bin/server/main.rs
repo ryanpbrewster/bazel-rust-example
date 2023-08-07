@@ -1,7 +1,7 @@
 use clap::Parser;
 use echo_proto::echo::proto::{
-    EchoRequest, EchoResponse,
     echo_server::{Echo, EchoServer},
+    EchoRequest, EchoResponse,
 };
 use tonic::{transport::Server, Request, Response, Status};
 
@@ -9,9 +9,16 @@ use tonic::{transport::Server, Request, Response, Status};
 async fn main() -> anyhow::Result<()> {
     let Args { address } = Args::parse();
 
+    let (_, health_srv) = tonic_health::server::health_reporter();
+    let reflection_srv = tonic_reflection::server::Builder::configure()
+        .register_encoded_file_descriptor_set(tonic_health::pb::FILE_DESCRIPTOR_SET)
+        .build()?;
+
     println!("server listening on {}", address);
     Server::builder()
         .add_service(EchoServer::new(MyEcho))
+        .add_service(health_srv)
+        .add_service(reflection_srv)
         .serve(address.parse()?)
         .await?;
 
