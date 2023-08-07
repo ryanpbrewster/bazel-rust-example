@@ -9,14 +9,16 @@ use tonic::{transport::Server, Request, Response, Status};
 async fn main() -> anyhow::Result<()> {
     let Args { address } = Args::parse();
 
+    let echo_srv = EchoServer::new(MyEcho);
     let (_, health_srv) = tonic_health::server::health_reporter();
     let reflection_srv = tonic_reflection::server::Builder::configure()
+        .register_encoded_file_descriptor_set(ECHO_PROTO_DESCRIPTOR)
         .register_encoded_file_descriptor_set(tonic_health::pb::FILE_DESCRIPTOR_SET)
         .build()?;
 
     println!("server listening on {}", address);
     Server::builder()
-        .add_service(EchoServer::new(MyEcho))
+        .add_service(echo_srv)
         .add_service(health_srv)
         .add_service(reflection_srv)
         .serve(address.parse()?)
@@ -45,3 +47,5 @@ impl Echo for MyEcho {
         }))
     }
 }
+
+const ECHO_PROTO_DESCRIPTOR: &[u8] = include_bytes!(env!("ECHO_PROTO_DESCRIPTOR_LOCATION"));

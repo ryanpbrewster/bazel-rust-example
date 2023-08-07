@@ -13,4 +13,8 @@ rust_binary(
         "@crate_index//:tonic-health",
         "@crate_index//:tonic-reflection",
     ],
+    compile_data = ["//echo/proto:echo_proto"],
+    rustc_env = {
+        "ECHO_PROTO_DESCRIPTOR_LOCATION": "$(execpath //echo/proto:echo_proto)"
+    }
 )

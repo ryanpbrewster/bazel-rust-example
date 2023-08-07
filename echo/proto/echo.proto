@@ -2,15 +2,12 @@ syntax = "proto3";
 
 package echo.proto;
 
-import "google/protobuf/duration.proto";
-
 service Echo {
   rpc UnaryEcho(EchoRequest) returns (EchoResponse);
 }
 
 message EchoRequest {
   bytes payload = 1;
-  google.protobuf.Duration artificial_delay = 2;
 }
 
 message EchoResponse {
